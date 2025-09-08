@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Photo Album + Chatbox</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Mama Button */
+.mama-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 30px;
+}
+.mama-button:hover {
+    background-color: #ff3b3b;
+}
+
+/* Photo Album */
+.photo-album {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+.photo-album img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Chatbox */
+.chatbox {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fff;
+}
+.messages {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background: #fafafa;
+    text-align: left;
+    font-size: 14px;
+}
+#chat-input {
+    width: 70%;
+    padding: 8px;
+}
+.chatbox button {
+    padding: 8px 12px;
+    margin-left: 5px;
+}
+</style>
+</head>
+<body>
+
+<h1>Welcome to Mama's Photo Album</h1>
+
+<!-- Mama Button -->
+<button class="mama-button" onclick="showAlbum()">Mama</button>
+
+<!-- Album -->
+<div class="photo-album" id="album">
+  <img src="album/photo1.jpg" alt="Photo 1">
+  <img src="album/photo2.jpg" alt="Photo 2">
+  <img src="album/photo3.png" alt="Photo 3">
+</div>
+
+<!-- Chatbox -->
+<div class="chatbox" id="chatbox">
+  <div id="chat-messages" class="messages"></div>
+  <input type="text" id="chat-input" placeholder="Type a message...">
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+/* Album Show Function */
+function showAlbum() {
+    document.getElementById('album').style.display = 'grid';
+}
+
+/* Chatbox Function */
+function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const messages = document.getElementById("chat-messages");
+
+    if (input.value.trim() !== "") {
+        // User message
+        const msg = document.createElement("div");
+        msg.textContent = "You: " + input.value;
+        messages.appendChild(msg);
+
+        // Auto reply
+        const reply = document.createElement("div");
+        reply.textContent = "MamaBot: အေး... " + input.value;
+        reply.style.color = "blue";
+        messages.appendChild(reply);
+
+        // Reset input
+        input.value = "";
+        messages.scrollTop = messages.scrollHeight;
+    }
+}
+</script>
+
+</body>
+</html>
